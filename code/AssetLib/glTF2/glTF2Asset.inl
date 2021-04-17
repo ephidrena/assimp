@@ -1291,7 +1291,47 @@ inline void Material::Read(Value &material, Asset &r) {
     ReadMember(material, "alphaMode", this->alphaMode);
     ReadMember(material, "alphaCutoff", this->alphaCutoff);
 
+    ASSIMP_LOG_INFO("Looking for extras");
+
+    if (Value *extras = FindObject(material, "extras")) {
+        ReadMember(*extras, "p_turbulence", this->p_turbulence);
+        ReadMember(*extras, "p_friction", this->p_friction);
+        ReadMember(*extras, "p_lifetime", this->p_lifetime);
+
+        if (!ReadMember(*extras, "p_min_lifetime", this->p_min_lifetime) )
+        {
+            this->p_min_lifetime = 5;
+        }
+        ASSIMP_LOG_INFO("Parsing cluster number");
+        if (!ReadMember(*extras, "p_cluster_number", this->p_cluster_number) )
+        {
+            this->p_cluster_number = 1;
+            ASSIMP_LOG_INFO("Found cluster number");
+        }
+        if (!ReadMember(*extras, "p_cluster_random_seed", this->p_cluster_random_seed) )
+        {
+            this->p_cluster_random_seed = 5;
+        }
+        if (!ReadMember(*extras, "p_cluster_size_min", this->p_cluster_size_min) )
+        {
+            this->p_cluster_size_min = 5;
+        }
+        if (!ReadMember(*extras, "p_cluster_size_max", this->p_cluster_size_max) )
+        {
+            this->p_cluster_size_max = 127;
+        }
+        ReadMember(*extras, "p_number", this->p_number);
+        ReadMember(*extras, "p_size_max", this->p_size_max);
+        ReadMember(*extras, "p_size_min", this->p_size_min);
+        ReadMember(*extras, "p_velocity", this->p_velocity);
+        ReadMember(*extras, "p_wind_x", this->p_wind_x);
+        ReadMember(*extras, "p_wind_y", this->p_wind_y);
+        ReadMember(*extras, "p_wind_z", this->p_wind_z);
+    }
+
     if (Value *extensions = FindObject(material, "extensions")) {
+        ASSIMP_LOG_INFO("Found extensions parameter");
+
         if (r.extensionsUsed.KHR_materials_pbrSpecularGlossiness) {
             if (Value *curPbrSpecularGlossiness = FindObject(*extensions, "KHR_materials_pbrSpecularGlossiness")) {
                 PbrSpecularGlossiness pbrSG;
@@ -1376,6 +1416,25 @@ inline void Material::SetDefaults() {
     alphaCutoff = 0.5f;
     doubleSided = false;
     unlit = false;
+
+    // Custom particle defaults
+    p_cluster_number = 1;
+    p_cluster_size_min = 5;
+    p_cluster_size_max = 127;
+    p_cluster_random_seed = 2;
+
+    p_turbulence = 1.0;
+    p_friction = 0.95;
+    p_lifetime = 255;
+    p_min_lifetime = 0;
+    p_number = 100;
+    p_size_max = 64;
+    p_size_min = 1;
+    p_velocity = 15;
+    p_wind_x = 0;
+    p_wind_y = 0;
+    p_wind_z = 0;
+
 }
 
 inline void PbrSpecularGlossiness::SetDefaults() {
