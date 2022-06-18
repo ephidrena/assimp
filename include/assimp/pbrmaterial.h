@@ -91,21 +91,4 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define AI_MATKEY_GLTF_TEXTURE_SCALE(type, N) _AI_MATKEY_GLTF_SCALE_BASE, type, N
 #define AI_MATKEY_GLTF_TEXTURE_STRENGTH(type, N) _AI_MATKEY_GLTF_STRENGTH_BASE, type, N
 
-#define AI_MATKEY_GLTF_P_CLUSTER_NUMBER "$mat.gltf.p_cluster_number", 0, 0
-#define AI_MATKEY_GLTF_P_CLUSTER_RANDOM_SEED "$mat.gltf.p_cluster_random_seed", 0, 0
-#define AI_MATKEY_GLTF_P_CLUSTER_SIZE_MIN "$mat.gltf.p_cluster_size_min", 0, 0
-#define AI_MATKEY_GLTF_P_CLUSTER_SIZE_MAX "$mat.gltf.p_cluster_size_max", 0, 0
-
-#define AI_MATKEY_GLTF_P_TURBULENCE "$mat.gltf.p_turbulence", 0, 0
-#define AI_MATKEY_GLTF_P_FRICTION "$mat.gltf.p_friction", 0, 0
-#define AI_MATKEY_GLTF_P_LIFETIME "$mat.gltf.p_lifetime", 0, 0
-#define AI_MATKEY_GLTF_P_MIN_LIFETIME "$mat.gltf.p_min_lifetime", 0, 0
-#define AI_MATKEY_GLTF_P_NUMBER "$mat.gltf.p_number", 0, 0
-#define AI_MATKEY_GLTF_P_SIZE_MAX "$mat.gltf.p_size_max", 0, 0
-#define AI_MATKEY_GLTF_P_SIZE_MIN "$mat.gltf.p_size_min", 0, 0
-#define AI_MATKEY_GLTF_P_VELOCITY "$mat.gltf.p_velocity", 0, 0
-#define AI_MATKEY_GLTF_P_WIND_X "$mat.gltf.p_wind_x", 0, 0
-#define AI_MATKEY_GLTF_P_WIND_Y "$mat.gltf.p_wind_y", 0, 0
-#define AI_MATKEY_GLTF_P_WIND_Z "$mat.gltf.p_wind_z", 0, 0
-
 #endif //!!AI_PBRMATERIAL_H_INC

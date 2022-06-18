@@ -313,25 +313,15 @@ static aiMaterial *ImportMaterial(std::vector<int> &embeddedTexIdxs, Asset &r, M
             aimat->AddProperty(&transmission.transmissionFactor, 1, AI_MATKEY_GLTF_MATERIAL_TRANSMISSION_FACTOR);
             SetMaterialTextureProperty(embeddedTexIdxs, r, transmission.transmissionTexture, aimat, AI_MATKEY_GLTF_MATERIAL_TRANSMISSION_TEXTURE);
         }
-        ASSIMP_LOG_DEBUG_F("cluster ", mat.p_cluster_number, " number");
 
-        aimat->AddProperty(&mat.p_cluster_number, 1, AI_MATKEY_GLTF_P_CLUSTER_NUMBER);
-        aimat->AddProperty(&mat.p_cluster_size_min, 1, AI_MATKEY_GLTF_P_CLUSTER_SIZE_MIN);
-        aimat->AddProperty(&mat.p_cluster_size_max, 1, AI_MATKEY_GLTF_P_CLUSTER_SIZE_MAX);
-        aimat->AddProperty(&mat.p_cluster_random_seed, 1, AI_MATKEY_GLTF_P_CLUSTER_RANDOM_SEED);
-
-        aimat->AddProperty(&mat.p_turbulence, 1, AI_MATKEY_GLTF_P_TURBULENCE);
-        aimat->AddProperty(&mat.p_friction, 1, AI_MATKEY_GLTF_P_FRICTION);
-        aimat->AddProperty(&mat.p_lifetime, 1, AI_MATKEY_GLTF_P_LIFETIME);
-        aimat->AddProperty(&mat.p_min_lifetime, 1, AI_MATKEY_GLTF_P_MIN_LIFETIME);
-        aimat->AddProperty(&mat.p_number, 1, AI_MATKEY_GLTF_P_NUMBER);
-        aimat->AddProperty(&mat.p_size_max, 1, AI_MATKEY_GLTF_P_SIZE_MAX);
-        aimat->AddProperty(&mat.p_size_min, 1, AI_MATKEY_GLTF_P_SIZE_MIN);
-        aimat->AddProperty(&mat.p_velocity, 1, AI_MATKEY_GLTF_P_VELOCITY);
-        aimat->AddProperty(&mat.p_wind_x, 1, AI_MATKEY_GLTF_P_WIND_X);
-        aimat->AddProperty(&mat.p_wind_y, 1, AI_MATKEY_GLTF_P_WIND_Y);
-        aimat->AddProperty(&mat.p_wind_z, 1, AI_MATKEY_GLTF_P_WIND_Z);
-
+        for (int i = 0; i<mat.propertyNames.size(); i++)
+        {
+            std::string prop = "$mat.gltf."+mat.propertyNames[i];
+            ASSIMP_LOG_INFO_F( "xtra Adding property ", prop, "=", mat.propertyValues[i] );
+            float val = mat.propertyValues[i];
+            aimat->AddProperty( &val, 1, prop.c_str(),0,0);
+        }
+        
         return aimat;
     } catch (...) {
         delete aimat;

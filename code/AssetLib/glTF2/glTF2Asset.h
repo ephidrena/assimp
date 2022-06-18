@@ -769,22 +769,8 @@ struct Material : public Object {
     float alphaCutoff;
     bool doubleSided;
 
-    // Custom particle parameters
-    float p_cluster_random_seed;
-    float p_cluster_size_min;
-    float p_cluster_size_max;
-    float p_cluster_number;
-    float p_turbulence;
-    float p_lifetime;
-    float p_min_lifetime;
-    float p_friction;
-    float p_number;
-    float p_size_max;
-    float p_size_min;
-    float p_velocity;
-    float p_wind_x;
-    float p_wind_y;
-    float p_wind_z;
+    std::vector<std::string> propertyNames;
+    std::vector<float> propertyValues;
 
     //extension: KHR_materials_pbrSpecularGlossiness
     Nullable<PbrSpecularGlossiness> pbrSpecularGlossiness;
